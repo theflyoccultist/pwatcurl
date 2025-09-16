@@ -1,0 +1,5 @@
+https://example.com
+http://httpbin.org/status/200
+http://httpbin.org/status/404
+http://httpbin.org/status/301
+http://httpbin.org/get

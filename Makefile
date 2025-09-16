@@ -7,7 +7,7 @@ OBJ				:= $(SRCS:.c=.o)
 BIN				:= pwatcurl
 
 $(BIN): $(OBJ)
-	@echo "Compiling with sass..."
+	@echo "Scheming with evil thoughts..."
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean:
