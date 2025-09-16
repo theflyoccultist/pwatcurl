@@ -1,8 +1,8 @@
 CC				:= gcc
-CFLAGS		:= -Wall -Wextra -Iinclude
+CFLAGS		:= -O0 -Wall -Wextra -Iinclude
 LDFLAGS		:= -lcurl
 
-SRCS			:= src/main.c src/request.c
+SRCS			:= src/main.c src/conf_file_parser.c
 OBJ				:= $(SRCS:.c=.o)
 BIN				:= pwatcurl
 
