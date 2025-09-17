@@ -1,4 +1,4 @@
-#include "conf_file_parser.h"
+#include "../lib/conf_file_parser.h"
 // #include "request.h"
 #include <stdio.h>
 
@@ -12,10 +12,10 @@
 //   return 0;
 // }
 
-int main() {
-  config_option_t co = read_config_file("./pwatcurl.conf");
+// TODO: Unknown keys: print a warning, but don't crash.
 
-  // TODO: move this part to a separate apply_config(co) function
+// TODO: default values, for example if ascii_art is missing
+int apply_config(config_option_t co) {
   if (!co) {
     fprintf(stderr, "Config parser returned NULL\n");
     return -1;
@@ -24,6 +24,12 @@ int main() {
   for (config_option_t it = co; it != NULL; it = it->prev) {
     printf("Key: %s\nValue: %s\n", it->key, it->value);
   }
+  return 0;
+}
 
+int main() {
+  config_option_t co = read_config_file("./pwatcurl.conf");
+  apply_config(co);
   destroy_config_file(co);
+  return 0;
 }

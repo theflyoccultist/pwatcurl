@@ -1,16 +1,32 @@
 #include "conf_file_parser.h"
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// TODO:  Make parsing more forgiving (ignore whitespace around "mood = goth",
-// and case insensivity)
+// trim all whitespace
+void trim(char *s) {
+  char *d = s;
+  do {
+    while (*d == ' ') {
+      ++d;
+    }
+  } while ((*s++ = *d++));
+}
 
-// TODO: Unknown keys: print a warning, but don't crash.
+// convert to lowercase
+void to_lowercase(char *s) {
+  for (int i = 0; s[i]; i++) {
+    s[i] = tolower(s[i]);
+  }
+}
 
-// TODO: ignore inline comments
-
-// TODO: default values, for example if ascii_art is missing
+// ignore inline comments
+void strip_inline_comments(char *s, const char *comment) {
+  char *pos = strstr(s, comment);
+  if (pos)
+    *pos = '\0';
+}
 
 config_option_t read_config_file(char *path) {
   FILE *fp = fopen(path, "r");
@@ -25,6 +41,10 @@ config_option_t read_config_file(char *path) {
   while (fgets(line, sizeof(line), fp)) {
     if (line[0] == '#' || line[0] == ';' || line[0] == '\n')
       continue;
+
+    trim(line);
+    to_lowercase(line);
+    strip_inline_comments(line, "#");
 
     char key[128], value[128];
     if (sscanf(line, " %127[^=]=%127s", key, value) == 2) {
