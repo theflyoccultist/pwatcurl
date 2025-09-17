@@ -1,8 +1,13 @@
 #include "../lib/conf_file_parser.h"
+#include "../lib/text_color.h"
 #include <stdio.h>
 #include <string.h>
 
-void handle_color(const char *value) { printf("colors chosen: %s\n", value); }
+void handle_color(const char *value) {
+  text_color c = parse_color(value);
+  char *ansi = change_text_color(c);
+  printf("%stext color: %s%s\n", ansi, value, ANSI_COLOR_RESET);
+}
 
 void handle_ascii_art(const char *value) {
   printf("ascii_art mode: %s\n", value);
