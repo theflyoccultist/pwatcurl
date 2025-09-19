@@ -1,4 +1,6 @@
+#include "../lib/ascii_art_handler.h"
 #include "../lib/conf_file_parser.h"
+#include "../lib/mood_handler.h"
 #include "../lib/text_color.h"
 #include <stdio.h>
 #include <string.h>
@@ -10,10 +12,18 @@ void handle_color(const char *value) {
 }
 
 void handle_ascii_art(const char *value) {
-  printf("ascii_art mode: %s\n", value);
+  if (ascii_art_activated(value)) {
+    printf("ascii_art mode: active\n");
+  } else {
+    printf("ascii_art mode: inactive\n");
+  }
 }
 
-void handle_mood(const char *value) { printf("mood chosen: %s\n", value); }
+void handle_mood(const char *value) {
+  moods m = parse_mood(value);
+  char *chosen_mood = change_mood(m);
+  printf("mood chosen: %s\n", chosen_mood);
+}
 
 void handle_unknown(const char *key, const char *value) {
   printf("Unknown key and value: %s=%s\n", key, value);
@@ -21,13 +31,14 @@ void handle_unknown(const char *key, const char *value) {
 
 typedef struct {
   const char *key;
+  const char *default_value;
   void (*handler)(const char *value);
 } option_handler_t;
 
-option_handler_t handlers[] = {{"color", handle_color},
-                               {"ascii_art", handle_ascii_art},
-                               {"mood", handle_mood},
-                               {NULL, NULL}};
+option_handler_t handlers[] = {{"color", "white", handle_color},
+                               {"ascii_art", "yes", handle_ascii_art},
+                               {"mood", "goth", handle_mood},
+                               {NULL, NULL, NULL}};
 
 int apply_config(config_option_t co) {
   if (!co) {
@@ -48,6 +59,7 @@ int apply_config(config_option_t co) {
       handle_unknown(it->key, it->value);
     }
   }
+
   return 0;
 }
 

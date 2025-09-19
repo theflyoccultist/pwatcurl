@@ -37,6 +37,8 @@ char *change_text_color(text_color c) {
     return ANSI_COLOR_MAGENTA;
   case cyan:
     return ANSI_COLOR_CYAN;
+  case white:
+    return ANSI_COLOR_WHITE;
   default:
     return ANSI_COLOR_RESET;
   }

@@ -5,7 +5,10 @@ LDFLAGS		:= -lcurl
 SRCS			:= src/main.c \
 						 src/config_handler.c \
 						 lib/conf_file_parser.c \
-						 lib/text_color.c
+						 lib/text_color.c \
+						 lib/mood_handler.c \
+						 lib/ascii_art_handler.c
+
 OBJ				:= $(SRCS:.c=.o)
 BIN				:= pwatcurl
 
