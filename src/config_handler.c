@@ -8,13 +8,21 @@
 void handle_color(const char *value) {
   text_color c = parse_color(value);
   char *ansi = change_text_color(c);
-  printf("%stext color: %s%s\n", ansi, value, ANSI_COLOR_RESET);
+  if (strcmp(ansi, "\x1b[0m") == 0) {
+    printf("%stext color set to default: white%s\n", ansi, ANSI_COLOR_RESET);
+  } else {
+    printf("%stext color: %s%s\n", ansi, value, ANSI_COLOR_RESET);
+  }
 }
+
+static int ascii_art_enabled = 0;
 
 void handle_ascii_art(const char *value) {
   if (ascii_art_activated(value)) {
+    ascii_art_enabled = 1;
     printf("ascii_art mode: active\n");
   } else {
+    ascii_art_enabled = 0;
     printf("ascii_art mode: inactive\n");
   }
 }
@@ -23,10 +31,13 @@ void handle_mood(const char *value) {
   moods m = parse_mood(value);
   char *chosen_mood = change_mood(m);
   printf("mood chosen: %s\n", chosen_mood);
+  if (ascii_art_enabled) {
+    display_ascii(chosen_mood);
+  }
 }
 
 void handle_unknown(const char *key, const char *value) {
-  printf("Unknown key and value: %s=%s\n", key, value);
+  printf("No idea what you wrote here: %s=%s\n", key, value);
 }
 
 typedef struct {
@@ -36,9 +47,18 @@ typedef struct {
 } option_handler_t;
 
 option_handler_t handlers[] = {{"color", "white", handle_color},
-                               {"ascii_art", "yes", handle_ascii_art},
+                               {"ascii_art", "no", handle_ascii_art},
                                {"mood", "goth", handle_mood},
                                {NULL, NULL, NULL}};
+
+void apply_defaults() {
+  printf("Default settings:\n");
+  for (option_handler_t *h = handlers; h->key; h++) {
+    fprintf(stderr, "Default setting for %s: %s\n", h->key, h->default_value);
+    h->handler(h->default_value);
+  }
+  printf("___________________\n\n");
+}
 
 int apply_config(config_option_t co) {
   if (!co) {
@@ -46,6 +66,9 @@ int apply_config(config_option_t co) {
     return -1;
   }
 
+  apply_defaults();
+
+  printf(".conf file found. Applying settings...\n");
   for (config_option_t it = co; it != NULL; it = it->prev) {
     int handled = 0;
     for (option_handler_t *h = handlers; h->key; h++) {
@@ -65,6 +88,6 @@ int apply_config(config_option_t co) {
 
 void config_handler() {
   config_option_t co = read_config_file("./pwatcurl.conf");
-  apply_config(co);
+  co ? apply_config(co) : apply_defaults();
   destroy_config_file(co);
 }

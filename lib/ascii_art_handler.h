@@ -5,4 +5,6 @@
 
 bool ascii_art_activated(const char *value);
 
+int display_ascii(const char *mood);
+
 #endif // !ASCII_ART_HANDLER_H

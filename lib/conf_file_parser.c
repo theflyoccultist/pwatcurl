@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// TODO: default values, for example if ascii_art is missing
-
 // trim all whitespace
 void trim(char *s) {
   char *d = s;
