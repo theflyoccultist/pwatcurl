@@ -1,18 +1,18 @@
-CC				:= gcc
-CFLAGS		:= -O0 -Wall -Wextra -Iinclude
-LDFLAGS		:= -lcurl
+CC = gcc
+CFLAGS = -O0 -Wall -Wextra -Iinclude
+LDFLAGS = -lcurl
 
-SRCS			:= src/main.c \
-						 src/cli_args.c \
-						 src/config_handler.c \
-						 src/request.c \
-						 lib/conf_file_parser.c \
-						 lib/text_color.c \
-						 lib/mood_handler.c \
-						 lib/ascii_art_handler.c
+SRCS = 	src/main.c \
+				src/cli_args.c \
+				src/config_handler.c \
+				src/request.c \
+				lib/conf_file_parser.c \
+				lib/text_color.c \
+				lib/mood_handler.c \
+				lib/ascii_art_handler.c
 
-OBJ				:= $(SRCS:.c=.o)
-BIN				:= pwatcurl
+OBJ = $(SRCS:.c=.o)
+BIN = pwatcurl
 
 $(BIN): $(OBJ)
 	@echo "Scheming with evil thoughts..."

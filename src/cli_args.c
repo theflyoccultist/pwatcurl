@@ -1,7 +1,6 @@
 #include "cli_args.h"
 #include "request.h"
 #include <getopt.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -27,10 +26,11 @@ int cli_args(int argc, char *argv[]) {
   int option_index = 0;
   int c;
 
-  request_opts_t opts = {
-      .verbose = 0,
-      .output_file = NULL,
-  };
+  request_opts_t opts = {.verbose = 0,
+                         .follow_redirects = 0,
+                         .output_file = NULL,
+                         .save_remote_name = 0,
+                         .headers_only = 0};
 
   static struct option long_options[] = {{"output", no_argument, 0, 'o'},
                                          {"remote-name", no_argument, 0, 'O'},
@@ -53,15 +53,20 @@ int cli_args(int argc, char *argv[]) {
     // S tier features
     case 'o':
       printf("Write to file: %s\n", optarg);
+      opts.output_file = optarg;
       break;
     case 'O':
       printf("Save with remote filename\n");
+      opts.save_remote_name = 1;
       break;
     case 'L':
       printf("Follow redirects\n");
+      opts.follow_redirects = 1;
       break;
     case 'I':
       printf("Headers only\n");
+      opts.verbose = 1;
+      opts.headers_only = 1;
       break;
     case 'v':
       printf("Verbose mode\n");
@@ -84,7 +89,7 @@ int cli_args(int argc, char *argv[]) {
       printf("Show errors\n");
       break;
     case 'i':
-      printf("Include headers in output.\n");
+      printf("Include headers in output\n");
       break;
     case 'w':
       printf("Output format: %s\n", optarg);
