@@ -1,8 +1,12 @@
+#include "request.h"
 #include <curl/curl.h>
 #include <curl/easy.h>
+#include <stdbool.h>
 #include <stdio.h>
 
-void perform_get_request(const char *url) {
+void verbose_mode(CURL *curl) { curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L); }
+
+void perform_get_request(const char *url, request_opts_t *opts) {
   CURL *curl;
   CURLcode res;
 
@@ -11,6 +15,9 @@ void perform_get_request(const char *url) {
     curl_easy_setopt(curl, CURLOPT_URL, url);
     curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+
+    if (opts->verbose)
+      verbose_mode(curl);
 
     res = curl_easy_perform(curl);
     if (res != CURLE_OK) {

@@ -1,6 +1,7 @@
 #include "cli_args.h"
 #include "request.h"
 #include <getopt.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -25,6 +26,11 @@ void print_help() {
 int cli_args(int argc, char *argv[]) {
   int option_index = 0;
   int c;
+
+  request_opts_t opts = {
+      .verbose = 0,
+      .output_file = NULL,
+  };
 
   static struct option long_options[] = {{"output", no_argument, 0, 'o'},
                                          {"remote-name", no_argument, 0, 'O'},
@@ -59,6 +65,7 @@ int cli_args(int argc, char *argv[]) {
       break;
     case 'v':
       printf("Verbose mode\n");
+      opts.verbose = 1;
       break;
     // A tier features
     case 'X':
@@ -95,8 +102,8 @@ int cli_args(int argc, char *argv[]) {
   if (optind < argc) {
     for (int i = optind; i < argc; i++) {
       const char *url = argv[i];
-      printf("Default GET request to: %s\n", url);
-      perform_get_request(url);
+      printf("GET request to: %s\n", url);
+      perform_get_request(url, &opts);
     }
   } else {
     printf("No URL provided!\n");
