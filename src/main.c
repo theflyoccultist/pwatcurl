@@ -1,5 +1,5 @@
+#include "cli_args.h"
 #include "config_handler.h"
-#include "request.h"
 #include <stdio.h>
 
 int main(int argc, char *argv[]) {
@@ -9,6 +9,7 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  perform_get_request(argv[1]);
+  cli_args(argc, argv);
+
   return 0;
 }

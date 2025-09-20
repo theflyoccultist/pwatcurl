@@ -1,0 +1,106 @@
+#include "cli_args.h"
+#include "request.h"
+#include <getopt.h>
+#include <stdio.h>
+#include <unistd.h>
+
+void print_help() {
+  printf("Usage: pwatcurl [options] <url>\n\n");
+  printf("Options:\n");
+  printf("  -o, --output <file>       Write output to <file>\n");
+  printf("  -O, --remote-name         Save file with remote name\n");
+  printf("  -L, --location            Follow redirects\n");
+  printf("  -I, --head                Headers only (HEAD request)\n");
+  printf("  -v, --verbose             Verbose mode\n");
+  printf("  -X, --request <method>    Specify HTTP method (GET, POST, etc.)\n");
+  printf("  -d, --data <data>         Send POST data\n");
+  printf("  -H, --header <header>     Pass custom header to server\n");
+  printf("  -s, --silent              Silent mode (no progress)\n");
+  printf("  -S  --show-error          Show errors (use with -s)\n");
+  printf("  -i, --show-headers        Include headers in output\n");
+  printf("  -w, --write-out <format>  Print status code or metrics\n");
+  printf("  -h, --help                Show this help message\n");
+}
+
+int cli_args(int argc, char *argv[]) {
+  int option_index = 0;
+  int c;
+
+  static struct option long_options[] = {{"output", no_argument, 0, 'o'},
+                                         {"remote-name", no_argument, 0, 'O'},
+                                         {"location", no_argument, 0, 'L'},
+                                         {"head", no_argument, 0, 'I'},
+                                         {"verbose", no_argument, 0, 'v'},
+                                         {"request", no_argument, 0, 'X'},
+                                         {"data", no_argument, 0, 'd'},
+                                         {"header", no_argument, 0, 'H'},
+                                         {"silent", no_argument, 0, 's'},
+                                         {"show-error", no_argument, 0, 'S'},
+                                         {"show-headers", no_argument, 0, 'i'},
+                                         {"write-out", no_argument, 0, 'w'},
+                                         {"help", no_argument, 0, 'h'},
+                                         {0, 0, 0, 0}};
+
+  while ((c = getopt_long(argc, argv, "o:OILvX:d:H:sSiw:h", long_options,
+                          &option_index)) != -1) {
+    switch (c) {
+    // S tier features
+    case 'o':
+      printf("Write to file: %s\n", optarg);
+      break;
+    case 'O':
+      printf("Save with remote filename\n");
+      break;
+    case 'L':
+      printf("Follow redirects\n");
+      break;
+    case 'I':
+      printf("Headers only\n");
+      break;
+    case 'v':
+      printf("Verbose mode\n");
+      break;
+    // A tier features
+    case 'X':
+      printf("HTTP method: %s\n", optarg);
+      break;
+    case 'd':
+      printf("POST data: %s\n", optarg);
+      break;
+    case 'H':
+      printf("Custom header: %s.\n", optarg);
+      break;
+    case 's':
+      printf("Silent mode\n");
+      break;
+    case 'S':
+      printf("Show errors\n");
+      break;
+    case 'i':
+      printf("Include headers in output.\n");
+      break;
+    case 'w':
+      printf("Output format: %s\n", optarg);
+      break;
+    case 'h':
+      print_help();
+      return 0;
+    case '?':
+      fprintf(stderr, "Unknown option character `%c'.\n", optopt);
+      printf("try './pwatcurl --help' for more information\n");
+      return 1;
+    }
+  }
+
+  if (optind < argc) {
+    for (int i = optind; i < argc; i++) {
+      const char *url = argv[i];
+      printf("Default GET request to: %s\n", url);
+      perform_get_request(url);
+    }
+  } else {
+    printf("No URL provided!\n");
+  }
+
+  return 0;
+}
