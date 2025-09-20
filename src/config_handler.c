@@ -11,7 +11,7 @@ void handle_color(const char *value) {
   if (strcmp(ansi, "\x1b[0m") == 0) {
     printf("%stext color set to default: white%s\n", ansi, ANSI_COLOR_RESET);
   } else {
-    printf("%stext color: %s%s\n", ansi, value, ANSI_COLOR_RESET);
+    printf("%stext color: %s\n", ansi, value);
   }
 }
 
@@ -52,7 +52,7 @@ option_handler_t handlers[] = {{"color", "white", handle_color},
                                {NULL, NULL, NULL}};
 
 void apply_defaults() {
-  printf("Default settings:\n");
+  printf(".conf file not found. Applying defaults...\n");
   for (option_handler_t *h = handlers; h->key; h++) {
     fprintf(stderr, "Default setting for %s: %s\n", h->key, h->default_value);
     h->handler(h->default_value);
@@ -65,8 +65,6 @@ int apply_config(config_option_t co) {
     fprintf(stderr, "Config parser returned NULL\n");
     return -1;
   }
-
-  apply_defaults();
 
   printf(".conf file found. Applying settings...\n");
   for (config_option_t it = co; it != NULL; it = it->prev) {
@@ -89,5 +87,6 @@ int apply_config(config_option_t co) {
 void config_handler() {
   config_option_t co = read_config_file("./pwatcurl.conf");
   co ? apply_config(co) : apply_defaults();
+  printf(ANSI_COLOR_RESET);
   destroy_config_file(co);
 }

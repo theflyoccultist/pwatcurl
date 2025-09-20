@@ -4,6 +4,7 @@ LDFLAGS		:= -lcurl
 
 SRCS			:= src/main.c \
 						 src/config_handler.c \
+						 src/request.c \
 						 lib/conf_file_parser.c \
 						 lib/text_color.c \
 						 lib/mood_handler.c \

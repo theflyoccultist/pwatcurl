@@ -2,7 +2,8 @@
 A troll version of curl, with a configurable mood.
 
 ## Features:
-- Configurable moods: edit the `pwatcurl.conf` file to change pwatcurl's behavior!
+- Configurable moods: edit the `pwatcurl.conf` file in the root folder to change pwatcurl's behavior!
+If you enable ASCII art without choosing a mood, pwatcurl refuses to commit to a vibe. No art will be shown.
 
 - `lib/conf_file_parser.c` and `lib/conf_file_parser.h`:
 My own C library to parse .conf files, inspired by [Config-Parser-C](https://github.com/welljsjs/Config-Parser-C).
