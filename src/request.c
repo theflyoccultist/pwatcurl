@@ -4,12 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-void follow_redirects(CURL *curl) {
-  curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-}
-
-void verbose_mode(CURL *curl) { curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L); }
-
 const char *get_remote_filename(const char *url) {
   const char *slash = strrchr(url, '/');
   if (slash && *(slash + 1) != '\0') {
@@ -33,10 +27,10 @@ void perform_get_request(const char *url, request_opts_t *opts) {
     }
 
     if (opts->follow_redirects)
-      follow_redirects(curl);
+      curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
 
     if (opts->verbose)
-      verbose_mode(curl);
+      curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 
     FILE *fp = NULL;
     if (opts->output_file) {
