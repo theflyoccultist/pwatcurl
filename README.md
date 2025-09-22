@@ -1,11 +1,6 @@
 # Pwatcurl
 A troll version of curl, with a configurable mood and curl's essential features.
 
-## Features:
-
-#### Configurable mood: edit the `pwatcurl.conf` to change pwatcurl's behavior!
-- If you enable ASCII art without choosing a mood, pwatcurl refuses to commit to a vibe. No art will be shown.
-- If the `pwatcurl.conf` file is missing, it will set itself to a default.
 
 ### CLI Flags:
 
@@ -17,6 +12,11 @@ A troll version of curl, with a configurable mood and curl's essential features.
 - `-L, --location` : Follow redirects
 - `-I, --head` : This flag will not only show the HTTP header, but also the IP addresses that it attempted to connect to.
 - `-v, --verbose` : Verbose mode
+
+### Configurable mood: 
+**Edit the `pwatcurl.conf` to change pwatcurl's behavior!**
+- If you enable ASCII art without choosing a mood, pwatcurl refuses to commit to a vibe. No art will be shown.
+- If the `pwatcurl.conf` file is missing, it will set itself to a default.
 
 ### Files:
 
