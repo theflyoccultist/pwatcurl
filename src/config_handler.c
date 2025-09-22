@@ -9,11 +9,13 @@ void handle_color(const char *value) {
   text_color c = parse_color(value);
   char *ansi = change_text_color(c);
   if (strcmp(ansi, "\x1b[0m") == 0) {
-    printf("%stext color set to default: white%s\n", ansi, ANSI_COLOR_RESET);
+    printf("%stext color set to default: white\n", ansi);
   } else {
     printf("%stext color: %s\n", ansi, value);
   }
 }
+
+void reset_color() { printf(ANSI_COLOR_RESET); }
 
 static int ascii_art_enabled = 0;
 
@@ -88,6 +90,5 @@ int apply_config(config_option_t co) {
 void config_handler() {
   config_option_t co = read_config_file("./pwatcurl.conf");
   co ? apply_config(co) : apply_defaults();
-  printf(ANSI_COLOR_RESET);
   destroy_config_file(co);
 }
