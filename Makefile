@@ -21,3 +21,18 @@ $(BIN): $(OBJ)
 clean:
 	@echo "Cleaning up your digital crimes..."
 	rm -f $(OBJ) $(BIN)
+
+PREFIX ?= /usr/local/
+CONF_DIR ?= $(HOME)/.pwatcurl
+
+install:
+	@echo "Making myself home at your place..."
+	mkdir -p $(CONF_DIR)
+	cp pwatcurl $(PREFIX)/bin/pwatcurl
+	cp pwatcurl.conf $(CONF_DIR)/pwatcurl.conf
+	chmod +x $(PREFIX)/bin/pwatcurl
+
+uninstall:
+	@echo "Goodbye."
+	rm -f $(PREFIX)/bin/pwatcurl
+	rm -f $(CONF_DIR)/pwatcurl.conf

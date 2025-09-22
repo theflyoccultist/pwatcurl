@@ -59,8 +59,9 @@ void perform_get_request(const char *url, request_opts_t *opts) {
     res = curl_easy_perform(curl);
     if (res != CURLE_OK) {
       fprintf(stderr, "[pwatcurl][error] '%s'\n", curl_easy_strerror(res));
+      mood_print_failure();
     } else {
-      printf("[pwatcurl] GET request succeded. Mood: tolerable.\n");
+      mood_print_success();
     }
 
     if (fp)
@@ -68,8 +69,6 @@ void perform_get_request(const char *url, request_opts_t *opts) {
     curl_easy_cleanup(curl);
 
   } else {
-    fprintf(
-        stderr,
-        "[pwatcurl][fatal] Could not initialize curl. Feeling: dramatic.\n");
+    mood_print_fatal();
   }
 }

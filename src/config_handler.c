@@ -29,7 +29,8 @@ void handle_ascii_art(const char *value) {
 
 void handle_mood(const char *value) {
   moods m = parse_mood(value);
-  char *chosen_mood = change_mood(m);
+  char *chosen_mood = set_mood(m);
+  change_mood(m);
   printf("mood chosen: %s\n", chosen_mood);
   if (ascii_art_enabled) {
     display_ascii(chosen_mood);

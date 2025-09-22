@@ -59,5 +59,11 @@ Then, you can build the program with those steps:
 git clone https://github.com/theflyoccultist/pwatcurl.git
 cd pwatcurl
 make
+sudo make install
 ```
 
+## Uninstall
+
+```bash
+sudo make uninstall
+```
