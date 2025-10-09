@@ -13,7 +13,17 @@ A troll version of curl, with a configurable mood and curl's essential features.
 - `-I, --head` : This flag will not only show the HTTP header, but also the IP addresses that it attempted to connect to.
 - `-v, --verbose` : Verbose mode
 
+#### Coming soon, flags for API testing:
+
+- `-X <method>` : specify HTTP method.
+- `-d <data>` : POST data.
+- `-H "<header: value>"` : custom headers.
+- `-s / -S` : silent & show errors.
+- `-i` : include headers in output.
+- `-w "%{http_code}"` : print status code.
+
 ### Configurable mood: 
+
 **Edit the `pwatcurl.conf` to change pwatcurl's behavior!**
 - If you enable ASCII art without choosing a mood, pwatcurl refuses to commit to a vibe. No art will be shown.
 - If the `pwatcurl.conf` file is missing, it will set itself to a default.
@@ -49,8 +59,17 @@ Main entry point.
 
 - Install the libcurl Development Package
 
+Debian:
+
 ```bash
 sudo apt install libcurl4-openssl-dev
+```
+
+Arch:
+
+```bash
+sudo pacman -S curl
+
 ```
 
 Then, you can build the program with those steps:

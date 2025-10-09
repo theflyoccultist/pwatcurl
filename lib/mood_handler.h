@@ -10,5 +10,6 @@ void change_mood(moods m);
 void mood_print_success();
 void mood_print_failure();
 void mood_print_fatal();
+void mood_print_nofilename();
 
 #endif // !MOOD_HANDLER_H

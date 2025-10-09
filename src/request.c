@@ -50,8 +50,7 @@ void perform_get_request(const char *url, request_opts_t *opts) {
         fp = fopen(fname, "w");
       } else {
         fp = fopen("pwatcurl_response.txt", "w");
-        fprintf(stderr, "[pwatcurl][snark] No filename in URL. "
-                        "Saving as 'pwatcurl_response.txt. You're welcome!\n");
+        mood_print_nofilename();
       }
       curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
     }
