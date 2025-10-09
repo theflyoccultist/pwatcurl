@@ -11,21 +11,20 @@ void handle_color(const char *value) {
   if (strcmp(ansi, "\x1b[0m") == 0) {
     printf("%stext color set to default: white\n", ansi);
   } else {
-    printf("%stext color: %s\n", ansi, value);
+    printf("%stext color: %s%s\n", ansi, value, ANSI_COLOR_RESET);
   }
 }
-
-void reset_color() { printf(ANSI_COLOR_RESET); }
 
 static int ascii_art_enabled = 0;
 
 void handle_ascii_art(const char *value) {
   if (ascii_art_activated(value)) {
     ascii_art_enabled = 1;
-    printf("ascii_art mode: active\n");
+
+    printf("ascii_art: active\n");
   } else {
     ascii_art_enabled = 0;
-    printf("ascii_art mode: inactive\n");
+    printf("ascii_art: inactive\n");
   }
 }
 
@@ -33,7 +32,9 @@ void handle_mood(const char *value) {
   moods m = parse_mood(value);
   char *chosen_mood = set_mood(m);
   change_mood(m);
+
   printf("mood chosen: %s\n", chosen_mood);
+
   if (ascii_art_enabled) {
     display_ascii(chosen_mood);
   }
@@ -70,6 +71,7 @@ int apply_config(config_option_t co) {
   }
 
   printf(".conf file found. Applying settings...\n");
+
   for (config_option_t it = co; it != NULL; it = it->prev) {
     int handled = 0;
     for (option_handler_t *h = handlers; h->key; h++) {

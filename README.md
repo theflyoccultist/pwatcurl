@@ -69,7 +69,6 @@ Arch:
 
 ```bash
 sudo pacman -S curl
-
 ```
 
 Then, you can build the program with those steps:

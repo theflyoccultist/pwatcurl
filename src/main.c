@@ -10,7 +10,5 @@ int main(int argc, char *argv[]) {
   }
 
   cli_args(argc, argv);
-
-  reset_color();
   return 0;
 }

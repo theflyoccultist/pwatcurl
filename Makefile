@@ -9,7 +9,8 @@ SRCS = 	src/main.c \
 				lib/conf_file_parser.c \
 				lib/text_color.c \
 				lib/mood_handler.c \
-				lib/ascii_art_handler.c
+				lib/ascii_art_handler.c \
+				lib/cooldown.c
 
 OBJ = $(SRCS:.c=.o)
 BIN = pwatcurl
