@@ -1,4 +1,6 @@
+# Specific to this project
 pwatcurl
+.pwatcurl_launch_time
 
 # Prerequisites
 *.d
