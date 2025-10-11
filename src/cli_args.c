@@ -5,21 +5,22 @@
 #include <unistd.h>
 
 void print_help() {
-  printf("Usage: pwatcurl [options] <url>\n\n");
-  printf("Options:\n");
-  printf("  -o, --output <file>       Write output to <file>\n");
-  printf("  -O, --remote-name         Save file with remote name\n");
-  printf("  -L, --location            Follow redirects\n");
-  printf("  -I, --head                Headers only (HEAD request)\n");
-  printf("  -v, --verbose             Verbose mode\n");
-  printf("  -X, --request <method>    Specify HTTP method (GET, POST, etc.)\n");
-  printf("  -d, --data <data>         Send POST data\n");
-  printf("  -H, --header <header>     Pass custom header to server\n");
-  printf("  -s, --silent              Silent mode (no progress)\n");
-  printf("  -S  --show-error          Show errors (use with -s)\n");
-  printf("  -i, --show-headers        Include headers in output\n");
-  printf("  -w, --write-out <format>  Print status code or metrics\n");
-  printf("  -h, --help                Show this help message\n");
+  printf("Usage: pwatcurl [options] <url>\n\n"
+         "Options:\n"
+         "  -o, --output <file>       Write output to <file>\n"
+         "  -O, --remote-name         Save file with remote name\n"
+         "  -L, --location            Follow redirects\n"
+         "  -I, --head                Headers only (HEAD request)\n"
+         "  -v, --verbose             Verbose mode\n"
+         "  -h, --help                Show this help message\n"
+         "  Coming soon...\n"
+         "  -X, --request <method>    Specify HTTP method (GET, POST, etc.)\n"
+         "  -d, --data <data>         Send POST data\n"
+         "  -H, --header <header>     Pass custom header to server\n"
+         "  -s, --silent              Silent mode (no progress)\n"
+         "  -S  --show-error          Show errors (use with -s)\n"
+         "  -i, --show-headers        Include headers in output\n"
+         "  -w, --write-out <format>  Print status code or metrics\n");
 }
 
 int cli_args(int argc, char *argv[]) {

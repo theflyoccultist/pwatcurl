@@ -102,8 +102,7 @@ const char *apply_config(config_option_t co) {
   return messages;
 }
 
-void maybe_display_config(config_option_t co) {
-  const char *messages = apply_config(co);
+void maybe_display_config(const char *messages) {
   if (cooldown_active()) {
     printf("%s", messages);
   } else {
@@ -113,7 +112,7 @@ void maybe_display_config(config_option_t co) {
 
 void config_handler() {
   config_option_t co = read_config_file("./pwatcurl.conf");
-  co ? maybe_display_config(co) : apply_defaults();
+  co ? maybe_display_config(apply_config(co)) : apply_defaults();
 
   printf("%s", ANSI_COLOR_RESET);
   destroy_config_file(co);
