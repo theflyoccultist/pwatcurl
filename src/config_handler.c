@@ -13,10 +13,10 @@ const char *handle_color(const char *value) {
   char *ansi = change_text_color(c);
 
   if (strcmp(ansi, "\x1b[0m") == 0) {
-    snprintf(msg, sizeof(msg), "%stext color set to default: white\n", ansi);
+    snprintf(msg, sizeof(msg), "%stext color set to default: white", ansi);
     return msg;
   } else {
-    snprintf(msg, sizeof(msg), "%stext color: %s\n", ansi, value);
+    snprintf(msg, sizeof(msg), "%stext color: %s", ansi, value);
     printf("%s", ansi);
     return msg;
   }
@@ -44,7 +44,7 @@ const char *handle_mood(const char *value) {
     display_ascii(chosen_mood);
   }
 
-  snprintf(msg, sizeof(msg), "mood chosen: %s\n", chosen_mood);
+  snprintf(msg, sizeof(msg), "mood chosen: %s", chosen_mood);
   return msg;
 }
 

@@ -1,13 +1,14 @@
 # Pwatcurl
 A troll version of curl, with a configurable mood and curl's essential features.
 
+![Preview](public/thumb.png)
 
 ### CLI Flags:
 
 #### **Usage : `pwatcurl [options] <url>`**
 
 - `-h, --help` : Show this help message
-- `-o <file>` : Write output to <file>
+- `-o <file>` : Write output to file
 - `-O, --remote-name` : Save file with remote name. If no remote name is available, it will save output to a default file named `pwatcurl_response.txt`.
 - `-L, --location` : Follow redirects
 - `-I, --head` : This flag will not only show the HTTP header, but also the IP addresses that it attempted to connect to.
