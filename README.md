@@ -13,7 +13,6 @@ A troll version of curl, with a configurable mood and curl's essential features.
 - `-L, --location` : Follow redirects
 - `-I, --head` : This flag will not only show the HTTP header, but also the IP addresses that it attempted to connect to.
 - `-s / -S` : silent & show errors. To be used in combination.
-- `-w "%{http_code}"` : print http status code.
 - `-v, --verbose` : Verbose mode
 
 Of course, you can chain different flags like this:
@@ -22,12 +21,12 @@ Of course, you can chain different flags like this:
 ./pwatcurl -sS -o /dev/null -w "%{http_code}" https://rinkakuworks.com
 ```
 
-#### To be implemented:
+#### Coming soon, flags for API testing:
 
 - `-X <method>` : specify HTTP method.
 - `-d <data>` : POST data.
 - `-H "<header: value>"` : custom headers.
-- `-i` : include headers in output.
+- `-w "%{http_code}"` : print http status code. 
 
 ### Configurable mood: 
 
