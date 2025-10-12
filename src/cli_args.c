@@ -14,12 +14,7 @@ void print_help() {
          "  -v, --verbose             Verbose mode\n"
          "  -s, --silent              Silent mode (no progress)\n"
          "  -S  --show-error          Show errors (use with -s)\n"
-         "  -h, --help                Show this help message\n"
-         "  Coming soon...\n"
-         "  -X, --request <method>    Specify HTTP method (GET, POST, etc.)\n"
-         "  -d, --data <data>         Send POST data\n"
-         "  -H, --header <header>     Pass custom header to server\n"
-         "  -w \"%%{http_code}\"         Print HTTP status code\n");
+         "  -h, --help                Show this help message\n");
 }
 
 int cli_args(int argc, char *argv[]) {
