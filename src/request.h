@@ -9,6 +9,8 @@ typedef struct {
   const char *output_file;
   int save_remote_name;
   int headers_only;
+  int silent;
+  int show_error;
 } request_opts_t;
 
 void perform_get_request(const char *url, request_opts_t *opts);

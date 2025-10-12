@@ -1,4 +1,4 @@
-# Pwatcurl
+# PwatCurl
 A troll version of curl, with a configurable mood and curl's essential features.
 
 ![Preview](public/thumb.png)

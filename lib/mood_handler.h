@@ -11,5 +11,6 @@ void mood_print_success();
 void mood_print_failure();
 void mood_print_fatal();
 void mood_print_nofilename();
+void mood_print_easteregg();
 
 #endif // !MOOD_HANDLER_H

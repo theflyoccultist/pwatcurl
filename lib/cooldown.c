@@ -6,8 +6,7 @@
 #define CACHE_FILE "../.pwatcurl_launch_time"
 
 bool cooldown_active() {
-  const int COOLDOWN_SEC = 10;
-  // change to 600 if it works
+  const int COOLDOWN_SEC = 600;
 
   time_t now = time(NULL);
   time_t last = 0;
@@ -21,13 +20,13 @@ bool cooldown_active() {
   }
 
   if (!last || difftime(now, last) > COOLDOWN_SEC) {
-    // printf("First launch or 10+ minutes passed.\n");
+    // First launch or 10+ minutes passed
     fp = fopen(CACHE_FILE, "w");
     fprintf(fp, "%ld", now);
     fclose(fp);
     return true;
   } else {
-    // printf("Less than 10 minutes since last run.\n");
+    // Less than 10 minutes since last run
     return false;
   }
 }

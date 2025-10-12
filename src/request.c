@@ -56,6 +56,12 @@ void perform_get_request(const char *url, request_opts_t *opts) {
     }
 
     res = curl_easy_perform(curl);
+    if (opts->silent) {
+      curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
+      if (opts->show_error && res != CURLE_OK)
+        mood_print_easteregg();
+    }
+
     if (res != CURLE_OK) {
       fprintf(stderr, "[pwatcurl][error] '%s'\n", curl_easy_strerror(res));
       mood_print_failure();

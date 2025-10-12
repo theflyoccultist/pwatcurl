@@ -31,7 +31,9 @@ int cli_args(int argc, char *argv[]) {
                          .follow_redirects = 0,
                          .output_file = NULL,
                          .save_remote_name = 0,
-                         .headers_only = 0};
+                         .headers_only = 0,
+                         .silent = 0,
+                         .show_error = 0};
 
   static struct option long_options[] = {{"output", no_argument, 0, 'o'},
                                          {"remote-name", no_argument, 0, 'O'},
@@ -85,9 +87,11 @@ int cli_args(int argc, char *argv[]) {
       break;
     case 's':
       printf("Silent mode\n");
+      opts.silent = 1;
       break;
     case 'S':
       printf("Show errors\n");
+      opts.show_error = 1;
       break;
     case 'i':
       printf("Include headers in output\n");
