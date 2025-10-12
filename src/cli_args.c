@@ -7,24 +7,23 @@
 void print_help() {
   printf("Usage: pwatcurl [options] <url>\n\n"
          "Options:\n"
-         "  -o, --output <file>       Write output to <file>\n"
-         "  -O, --remote-name         Save file with remote name\n"
-         "  -L, --location            Follow redirects\n"
-         "  -I, --head                Headers only (HEAD request)\n"
-         "  -v, --verbose             Verbose mode\n"
-         "  -h, --help                Show this help message\n"
+         "  -o <file>            Write output to <file>\n"
+         "  -O                   Save file with remote name\n"
+         "  -L                   Follow redirects\n"
+         "  -I                   Headers only (HEAD request)\n"
+         "  -v                   Verbose mode\n"
+         "  -s                   Silent mode (no progress)\n"
+         "  -S                   Show errors (use with -s)\n"
+         "  -w \"%%{http_code}\" Print status code or metrics\n"
+         "  -h                   Show this help message\n"
          "  Coming soon...\n"
          "  -X, --request <method>    Specify HTTP method (GET, POST, etc.)\n"
          "  -d, --data <data>         Send POST data\n"
          "  -H, --header <header>     Pass custom header to server\n"
-         "  -s, --silent              Silent mode (no progress)\n"
-         "  -S  --show-error          Show errors (use with -s)\n"
-         "  -i, --show-headers        Include headers in output\n"
-         "  -w, --write-out <format>  Print status code or metrics\n");
+         "  -i, --show-headers        Include headers in output\n");
 }
 
 int cli_args(int argc, char *argv[]) {
-  int option_index = 0;
   int c;
 
   request_opts_t opts = {.verbose = 0,
@@ -35,23 +34,7 @@ int cli_args(int argc, char *argv[]) {
                          .silent = 0,
                          .show_error = 0};
 
-  static struct option long_options[] = {{"output", no_argument, 0, 'o'},
-                                         {"remote-name", no_argument, 0, 'O'},
-                                         {"location", no_argument, 0, 'L'},
-                                         {"head", no_argument, 0, 'I'},
-                                         {"verbose", no_argument, 0, 'v'},
-                                         {"request", no_argument, 0, 'X'},
-                                         {"data", no_argument, 0, 'd'},
-                                         {"header", no_argument, 0, 'H'},
-                                         {"silent", no_argument, 0, 's'},
-                                         {"show-error", no_argument, 0, 'S'},
-                                         {"show-headers", no_argument, 0, 'i'},
-                                         {"write-out", no_argument, 0, 'w'},
-                                         {"help", no_argument, 0, 'h'},
-                                         {0, 0, 0, 0}};
-
-  while ((c = getopt_long(argc, argv, "o:OILvX:d:H:sSiw:h", long_options,
-                          &option_index)) != -1) {
+  while ((c = getopt(argc, argv, "o:OILvX:d:H:sSiw:h")) != -1) {
     switch (c) {
     // S tier features
     case 'o':
@@ -105,7 +88,7 @@ int cli_args(int argc, char *argv[]) {
       return 0;
     case '?':
       fprintf(stderr, "Unknown option character `%c'.\n", optopt);
-      printf("try './pwatcurl --help' for more information\n");
+      printf("try 'pwatcurl -h' for more information\n");
       return 1;
     }
   }
