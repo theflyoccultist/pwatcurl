@@ -98,6 +98,7 @@ int cli_args(int argc, char *argv[]) {
       break;
     case 'w':
       printf("Output format: %s\n", optarg);
+      opts.write_out_format = optarg;
       break;
     case 'h':
       print_help();

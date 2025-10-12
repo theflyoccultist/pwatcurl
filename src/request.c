@@ -1,6 +1,7 @@
 #include "request.h"
 #include <curl/curl.h>
 #include <curl/easy.h>
+#include <curl/typecheck-gcc.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -60,6 +61,12 @@ void perform_get_request(const char *url, request_opts_t *opts) {
       curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
       if (opts->show_error && res != CURLE_OK)
         mood_print_easteregg();
+    }
+
+    if (strstr(opts->write_out_format, "%{http_code}")) {
+      long http_code = 0;
+      curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+      printf("%ld\n", http_code);
     }
 
     if (res != CURLE_OK) {

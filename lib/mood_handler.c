@@ -83,14 +83,13 @@ const char *easteregg_messages[MOOD_COUNT] = {
         "to see what it was. When she looked into the bathroom she saw a "
         "horrendous sight. Jeff had taken a knife and carved a smile into his "
         "cheeks.\n\n'Jeff, what are you doing?' asked his mother.\n\nJeff "
-        "looked "
-        "over to his mother. 'I couldn't keep smiling mommy. It hurt after "
-        "awhile. Now, I can smile forever.' Jeff's mother noticed his eyes, "
-        "ringed in black.\n\n'Jeff, your eyes!' His eyes were seemingly never "
-        "closing.\n\n'I couldn't see my face. I got tired and my eyes started "
-        "to close. I burned out the eyelids so I could forever see myself; my "
-        "new face.' Jeff' s mother slowly started to back away, seeing that "
-        "her son was going insane.'What' s wrong mommy? Aren't I "
+        "looked over to his mother. 'I couldn't keep smiling mommy. It hurt "
+        "after awhile. Now, I can smile forever.' Jeff's mother noticed his "
+        "eyes, ringed in black.\n\n'Jeff, your eyes!' His eyes were seemingly "
+        "never closing.\n\n'I couldn't see my face. I got tired and my eyes "
+        "started to close. I burned out the eyelids so I could forever see "
+        "myself; my new face.' Jeff' s mother slowly started to back away, "
+        "seeing that her son was going insane.'What' s wrong mommy? Aren't I "
         "beautiful?'\n"};
 
 void mood_print_easteregg() {

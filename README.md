@@ -12,16 +12,22 @@ A troll version of curl, with a configurable mood and curl's essential features.
 - `-O, --remote-name` : Save file with remote name. If no remote name is available, it will save output to a default file named `pwatcurl_response.txt`.
 - `-L, --location` : Follow redirects
 - `-I, --head` : This flag will not only show the HTTP header, but also the IP addresses that it attempted to connect to.
+- `-s / -S` : silent & show errors. To be used in combination.
+- `-w "%{http_code}"` : print http status code.
 - `-v, --verbose` : Verbose mode
 
-#### Coming soon, flags for API testing:
+Of course, you can chain different flags like this:
+
+```bash
+./pwatcurl -sS -o /dev/null -w "%{http_code}" https://rinkakuworks.com
+```
+
+#### To be implemented:
 
 - `-X <method>` : specify HTTP method.
 - `-d <data>` : POST data.
 - `-H "<header: value>"` : custom headers.
-- `-s / -S` : silent & show errors.
 - `-i` : include headers in output.
-- `-w "%{http_code}"` : print status code.
 
 ### Configurable mood: 
 
