@@ -19,7 +19,7 @@ void print_help() {
          "  -X, --request <method>    Specify HTTP method (GET, POST, etc.)\n"
          "  -d, --data <data>         Send POST data\n"
          "  -H, --header <header>     Pass custom header to server\n"
-         "  -w \"%%{http_code}\"      Print HTTP status code\n");
+         "  -w \"%%{http_code}\"         Print HTTP status code\n");
 }
 
 int cli_args(int argc, char *argv[]) {
@@ -41,13 +41,8 @@ int cli_args(int argc, char *argv[]) {
                                          {"location", no_argument, 0, 'L'},
                                          {"head", no_argument, 0, 'I'},
                                          {"verbose", no_argument, 0, 'v'},
-                                         {"request", no_argument, 0, 'X'},
-                                         {"data", no_argument, 0, 'd'},
-                                         {"header", no_argument, 0, 'H'},
                                          {"silent", no_argument, 0, 's'},
                                          {"show-error", no_argument, 0, 'S'},
-                                         {"show-headers", no_argument, 0, 'i'},
-                                         {"write-out", no_argument, 0, 'w'},
                                          {"help", no_argument, 0, 'h'},
                                          {0, 0, 0, 0}};
 
@@ -76,16 +71,6 @@ int cli_args(int argc, char *argv[]) {
       printf("Verbose mode\n");
       opts.verbose = 1;
       break;
-    // A tier features
-    case 'X':
-      printf("HTTP method: %s\n", optarg);
-      break;
-    case 'd':
-      printf("POST data: %s\n", optarg);
-      break;
-    case 'H':
-      printf("Custom header: %s.\n", optarg);
-      break;
     case 's':
       printf("Silent mode\n");
       opts.silent = 1;
@@ -93,9 +78,6 @@ int cli_args(int argc, char *argv[]) {
     case 'S':
       printf("Show errors\n");
       opts.show_error = 1;
-      break;
-    case 'i':
-      printf("Include headers in output\n");
       break;
     case 'w':
       printf("Output format: %s\n", optarg);

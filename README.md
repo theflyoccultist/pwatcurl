@@ -15,19 +15,6 @@ A troll version of curl, with a configurable mood and curl's essential features.
 - `-s / -S` : silent & show errors. To be used in combination.
 - `-v, --verbose` : Verbose mode
 
-Of course, you can chain different flags like this:
-
-```bash
-./pwatcurl -sS -o /dev/null -w "%{http_code}" https://rinkakuworks.com
-```
-
-#### Coming soon, flags for API testing:
-
-- `-X <method>` : specify HTTP method.
-- `-d <data>` : POST data.
-- `-H "<header: value>"` : custom headers.
-- `-w "%{http_code}"` : print http status code. 
-
 ### Configurable mood: 
 
 **Edit the `pwatcurl.conf` to change pwatcurl's behavior!**
