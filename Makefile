@@ -41,4 +41,4 @@ uninstall:
 	rm -f $(PREFIX)/bin/pwatcurl
 	rm -f $(CONF_DIR)/pwatcurl.conf
 
-.PHONY: all release debug clean install uninstall
+.PHONY: release debug clean install uninstall
