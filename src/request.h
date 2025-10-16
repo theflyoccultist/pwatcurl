@@ -1,7 +1,7 @@
 #ifndef REQUEST_H
 #define REQUEST_H
 
-#include "../lib/mood_handler.h"
+#include "lib/mood_handler.h"
 
 typedef struct {
   int verbose;

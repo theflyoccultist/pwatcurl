@@ -1,8 +1,8 @@
-#include "../lib/ascii_art_handler.h"
-#include "../lib/conf_file_parser.h"
-#include "../lib/cooldown.h"
-#include "../lib/mood_handler.h"
-#include "../lib/text_color.h"
+#include "lib/ascii_art_handler.h"
+#include "lib/conf_file_parser.h"
+#include "lib/cooldown.h"
+#include "lib/mood_handler.h"
+#include "lib/text_color.h"
 #include <stdio.h>
 #include <string.h>
 

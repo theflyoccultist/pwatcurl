@@ -2,22 +2,25 @@ CC = gcc
 CFLAGS = -O0 -Wall -Wextra -Iinclude
 LDFLAGS = -lcurl
 
-SRCS = 	src/main.c \
-				src/cli_args.c \
-				src/config_handler.c \
-				src/request.c \
-				lib/conf_file_parser.c \
-				lib/text_color.c \
-				lib/mood_handler.c \
-				lib/ascii_art_handler.c \
-				lib/cooldown.c
-
+SRCS = $(wildcard src/*.c src/lib/*.c)
 OBJ = $(SRCS:.c=.o)
 BIN = pwatcurl
 
+all: release
+
+release: $(CFLAGS) += -O2
+release: $(BIN)
+
+debug: CC = clang
+debug: CFLAGS += -g -O0 -fsanitize=address -fno-omit-frame-pointer
+debug: LDFLAGS += -fsanitize=address -fsanitize=undefined
+
+debug: $(BIN)
+	@echo "We are in Spy Mode."
+
 $(BIN): $(OBJ)
 	@echo "Scheming with evil thoughts..."
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	$(CC) $(OBJ) -o $@ $(LDFLAGS)
 
 clean:
 	@echo "Cleaning up your digital crimes..."
@@ -37,3 +40,5 @@ uninstall:
 	@echo "Goodbye."
 	rm -f $(PREFIX)/bin/pwatcurl
 	rm -f $(CONF_DIR)/pwatcurl.conf
+
+.PHONY: all release debug clean install uninstall
